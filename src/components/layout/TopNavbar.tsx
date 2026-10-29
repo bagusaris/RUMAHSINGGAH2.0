@@ -9,11 +9,13 @@ import {
   LogOut, 
   LogIn,
   CheckCircle2,
-  AlertTriangle
+  AlertTriangle,
+  FileDown
 } from 'lucide-react';
 import { useAuth } from '../../services/auth/authContext';
 import { storage } from '../../services/storage';
 import { UserRole } from '../../types/models';
+import { generateDeveloperGuidePdf } from '../../services/pdf/developerGuideGenerator';
 
 interface TopNavbarProps {
   onOpenTestRunner: () => void;
@@ -95,6 +97,24 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ onOpenTestRunner, activeTa
           {/* Right Tools & Auth Controls */}
           <div className="flex items-center gap-2 sm:gap-3">
             
+            {/* Download Developer Handbook PDF Button */}
+            <button
+              onClick={() => {
+                const { url, fileName } = generateDeveloperGuidePdf();
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+              }}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 transition-colors shadow-2xs cursor-pointer"
+              title="Unduh Buku Panduan & Tutorial Pengembang (PDF)"
+            >
+              <FileDown className="w-3.5 h-3.5 text-blue-600" />
+              <span className="hidden md:inline">Buku Panduan PDF</span>
+            </button>
+
             {/* Automated QA Test Runner Button */}
             <button
               onClick={onOpenTestRunner}

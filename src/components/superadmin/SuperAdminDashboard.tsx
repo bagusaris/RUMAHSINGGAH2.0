@@ -17,11 +17,13 @@ import {
   UserPlus,
   Mail,
   Phone,
-  Briefcase
+  Briefcase,
+  FileDown
 } from 'lucide-react';
 import { storage } from '../../services/storage';
 import { useAuth } from '../../services/auth/authContext';
 import { User, UserRole, DocumentRequirement, SystemSetting, AuditLog } from '../../types/models';
+import { generateDeveloperGuidePdf } from '../../services/pdf/developerGuideGenerator';
 
 export const SuperAdminDashboard: React.FC = () => {
   const { allUsers, currentUser, refreshUsers } = useAuth();
@@ -153,13 +155,32 @@ export const SuperAdminDashboard: React.FC = () => {
           </p>
         </div>
 
-        <button
-          onClick={refreshAll}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 shadow-2xs self-start sm:self-auto transition-colors"
-        >
-          <RefreshCw className="w-3.5 h-3.5 text-slate-500" />
-          <span>Muat Ulang Pengaturan</span>
-        </button>
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <button
+            onClick={() => {
+              const { url, fileName } = generateDeveloperGuidePdf();
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = fileName;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            }}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-blue-200 bg-blue-50 hover:bg-blue-100 text-xs font-bold text-blue-700 shadow-2xs transition-colors cursor-pointer"
+            title="Unduh Tutorial & Dokumentasi Teknis Developer (PDF)"
+          >
+            <FileDown className="w-3.5 h-3.5 text-blue-600" />
+            <span>Unduh Buku Panduan (PDF)</span>
+          </button>
+
+          <button
+            onClick={refreshAll}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 shadow-2xs transition-colors"
+          >
+            <RefreshCw className="w-3.5 h-3.5 text-slate-500" />
+            <span>Muat Ulang Pengaturan</span>
+          </button>
+        </div>
       </div>
 
       {feedbackMsg && (

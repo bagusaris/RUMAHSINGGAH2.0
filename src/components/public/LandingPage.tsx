@@ -14,9 +14,11 @@ import {
   Users,
   FileCheck,
   ChevronRight,
-  AlertCircle
+  AlertCircle,
+  FileDown
 } from 'lucide-react';
 import { storage } from '../../services/storage';
+import { generateDeveloperGuidePdf } from '../../services/pdf/developerGuideGenerator';
 
 interface LandingPageProps {
   onStartRegistration: () => void;
@@ -285,6 +287,23 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   <span>Portal Login Petugas & Pimpinan →</span>
                 </button>
               )}
+
+              <button
+                onClick={() => {
+                  const { url, fileName } = generateDeveloperGuidePdf();
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = fileName;
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-950/80 hover:bg-indigo-900 text-indigo-300 text-xs font-semibold border border-indigo-800/80 transition-colors cursor-pointer mt-1"
+                title="Buku Panduan Lengkap untuk Programmer & Setup Server"
+              >
+                <FileDown className="w-3.5 h-3.5 text-indigo-400" />
+                <span>Unduh Panduan Developer (PDF)</span>
+              </button>
             </div>
           </div>
         </div>
