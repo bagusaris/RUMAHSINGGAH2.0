@@ -12,11 +12,13 @@ import { DirectorDashboard } from './components/director/DirectorDashboard';
 import { ShelterDashboard } from './components/shelter/ShelterDashboard';
 import { SuperAdminDashboard } from './components/superadmin/SuperAdminDashboard';
 import { TestRunnerModal } from './components/testing/TestRunnerModal';
+import { LaravelCodeViewerModal } from './components/laravel/LaravelCodeViewerModal';
 
 const AppContent: React.FC = () => {
   const { currentRole } = useAuth();
   const [activeTab, setActiveTab] = useState<string>('public_landing');
   const [isTestRunnerOpen, setIsTestRunnerOpen] = useState<boolean>(false);
+  const [isLaravelCodeOpen, setIsLaravelCodeOpen] = useState<boolean>(false);
   const [verificationToken, setVerificationToken] = useState<string | undefined>(undefined);
 
   // Check URL query parameters for QR code verification (?verify=TOKEN)
@@ -62,6 +64,7 @@ const AppContent: React.FC = () => {
       {/* Top Navbar */}
       <TopNavbar
         onOpenTestRunner={() => setIsTestRunnerOpen(true)}
+        onOpenLaravelCode={() => setIsLaravelCodeOpen(true)}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
@@ -154,6 +157,12 @@ const AppContent: React.FC = () => {
       <TestRunnerModal
         isOpen={isTestRunnerOpen}
         onClose={() => setIsTestRunnerOpen(false)}
+      />
+
+      {/* Interactive Laravel Source Code Viewer */}
+      <LaravelCodeViewerModal
+        isOpen={isLaravelCodeOpen}
+        onClose={() => setIsLaravelCodeOpen(false)}
       />
 
     </div>

@@ -19,11 +19,12 @@ import { generateDeveloperGuidePdf } from '../../services/pdf/developerGuideGene
 
 interface TopNavbarProps {
   onOpenTestRunner: () => void;
+  onOpenLaravelCode?: () => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
 }
 
-export const TopNavbar: React.FC<TopNavbarProps> = ({ onOpenTestRunner, activeTab, setActiveTab }) => {
+export const TopNavbar: React.FC<TopNavbarProps> = ({ onOpenTestRunner, onOpenLaravelCode, activeTab, setActiveTab }) => {
   const { currentUser, currentRole, switchRole, logout } = useAuth();
   const [showRoleMenu, setShowRoleMenu] = useState(false);
   const [showNotifMenu, setShowNotifMenu] = useState(false);
@@ -114,6 +115,18 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ onOpenTestRunner, activeTa
               <FileDown className="w-3.5 h-3.5 text-blue-600" />
               <span className="hidden md:inline">Buku Panduan PDF</span>
             </button>
+
+            {/* View Laravel Codebase Button */}
+            {onOpenLaravelCode && (
+              <button
+                onClick={onOpenLaravelCode}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 transition-colors shadow-2xs cursor-pointer"
+                title="Lihat Source Code Laravel 11 / PHP 8.5"
+              >
+                <span className="w-3.5 h-3.5 rounded bg-rose-600 text-white font-bold text-[9px] flex items-center justify-center">LV</span>
+                <span className="hidden md:inline">Kode Laravel (PHP 8.5)</span>
+              </button>
+            )}
 
             {/* Automated QA Test Runner Button */}
             <button
