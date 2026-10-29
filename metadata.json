@@ -1,0 +1,6 @@
+{
+  "name": "SIM-RSP Dinas Kesehatan - Sistem Reservasi Rumah Singgah",
+  "description": "Sistem Informasi Pendaftaran dan Manajemen Reservasi Rumah Singgah Pasien Dinas Kesehatan dengan Verifikasi Dokumen, TTE Resmi, dan Alokasi Kamar",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

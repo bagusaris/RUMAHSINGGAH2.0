@@ -1,0 +1,820 @@
+# MASTER PROMPT — HEALTH DEPARTMENT SHELTER HOUSE REGISTRATION AND RESERVATION MANAGEMENT SYSTEM
+
+## A. AI ROLE AND RESPONSIBILITIES
+
+Act as a Senior Software Architect, System Analyst, UI/UX Designer, Senior Full-Stack Developer, Database Engineer, Security Engineer, and QA Engineer.
+
+Your task is to design and develop a **Health Department Shelter House Registration and Reservation Management System** that is fully functional, integrated with a real database, secure, maintainable, and ready for deployment after the required institutional configurations are completed.
+
+Do not stop at mockups, static landing pages, dashboard designs, or demonstration code. Build the application incrementally until its core features work correctly and can be tested.
+
+Use English for internal technical documentation and code identifiers. Use Indonesian for the user interface, form labels, validation messages, notifications, and official documents, since the application is intended for public services in Indonesia.
+
+## B. SYSTEM OBJECTIVES
+
+The application manages the complete process for people applying to stay at a Shelter House managed by a local Health Department (Dinas Kesehatan).
+
+The workflow includes:
+1. Public registration without requiring an account.
+2. Secure application tracking.
+3. Document review and administrative verification by Health Department Administrators.
+4. Approval, rejection, or clarification requests by the Health Department Director.
+5. Automatic generation of an approval letter in PDF format.
+6. Integration with an official electronic signature provider.
+7. Room, bed, capacity, and patient placement management.
+8. Dashboards, notifications, and audit logs.
+9. Internal user and system configuration management.
+10. Strong privacy and security controls for personal information and patient documents.
+
+## C. TECHNOLOGY SELECTION
+
+Choose the most appropriate technology stack based on the application's requirements, security, maintainability, hosting costs, availability of developers in Indonesia, documentation quality, and compatibility with electronic signature integrations.
+
+Evaluate at least two technology stack alternatives before making the final selection.
+
+Consider the following technologies:
+
+- Frontend: React, Next.js, Vue, or another suitable framework.
+- Backend: Laravel, NestJS, Django, or an equivalent framework.
+- Database: PostgreSQL or MySQL.
+- Private document storage.
+- PDF generation libraries.
+- Authentication and role-based authorization.
+- REST APIs or SDKs for electronic signature providers.
+- Automated testing and deployment tools.
+
+Select one primary stack that best fits the project. Avoid combining unnecessary frameworks or introducing excessive architectural complexity.
+
+Before coding, explain:
+1. The selected stack and why it is appropriate.
+2. The frontend, backend, database, and storage architecture.
+3. The project directory structure.
+4. The authentication and authorization strategy.
+5. The electronic signature integration strategy.
+6. The deployment and environment configuration strategy.
+7. The main technical risks and their mitigations.
+
+Once the architecture is sufficiently clear, proceed with implementation without repeatedly requesting approval for minor technical decisions. If institutional information is unavailable, use safe, clearly documented configuration placeholders.
+
+## D. USER ROLES AND ACCESS CONTROL
+
+Implement Role-Based Access Control (RBAC) on the backend. Never rely solely on hiding frontend menus to enforce authorization.
+
+### 1. Public User / Applicant
+
+Applicants must be able to submit applications without creating an account.
+
+Permissions:
+- View the Shelter House landing page and service information.
+- Read eligibility requirements and registration procedures.
+- Submit an application.
+- Upload required supporting documents.
+- Receive a unique application number and secure access credentials.
+- Track the application status.
+- View document revision requests.
+- Download an application receipt.
+- Download the approval letter once it becomes available.
+- View room assignment information after placement has been confirmed.
+
+Applicants must only access their own applications after completing the required identity verification.
+
+### 2. Health Department Administrator
+
+The administrator must log in.
+
+Permissions:
+- Access the administrator dashboard.
+- View and search submitted applications.
+- Filter applications by status, submission date, patient name, application number, and healthcare facility.
+- View patient details and supporting documents.
+- Review the completeness and validity of each required document.
+- Mark documents as pending review, valid, or requiring revision.
+- Provide specific comments about missing or invalid documents.
+- Return applications for correction.
+- Verify applications when all mandatory requirements are satisfied.
+- Reject administrative verification with a mandatory reason.
+- View application history.
+- Monitor Director approval status.
+- Access approval letters within the administrator's authorized scope.
+
+The Health Department Administrator must not have permission to grant final approval on behalf of the Director.
+
+### 3. Health Department Director
+
+The Director must log in and have final approval authority.
+
+Permissions:
+- View the dashboard of applications awaiting decisions.
+- Review applications that have passed administrative verification.
+- Access relevant patient information and supporting documents.
+- Review administrative verification results and comments.
+- Approve applications.
+- Reject applications with a mandatory reason.
+- Return applications for clarification.
+- View decision history and timestamps.
+- Monitor electronic signature processing.
+- Access and download approval letters.
+- View room placement status after approval.
+
+Only the Director or an officially authorized delegate may issue the final approval.
+
+### 4. Shelter House Administrator
+
+The Shelter House Administrator must log in.
+
+Permissions:
+- View patients whose applications have been approved by the Director.
+- Access relevant patient and companion information within the administrator's authorized scope.
+- View approval letter status.
+- Manage buildings, rooms, and beds.
+- Update room availability.
+- Assign rooms or beds to approved applicants.
+- Set check-in and check-out dates.
+- Update occupancy status.
+- Record patient arrival, departure, cancellation, and placement history.
+- View occupancy reports.
+
+The Shelter House Administrator must not modify the Director's decision, edit approval letters, or alter signed documents.
+
+### 5. Super Administrator
+
+Provide an optional Super Administrator role for system configuration and internal account management.
+
+Permissions:
+- Create, update, deactivate, and manage internal accounts.
+- Assign roles according to authorized responsibilities.
+- Configure document requirements.
+- Configure institutional information and letter templates.
+- Manage system settings.
+- View technical audit logs.
+
+The Super Administrator must not automatically have approval or signing authority. Separate technical administration from institutional decision-making authority.
+
+## E. PUBLIC REGISTRATION MODULE
+
+Build a professional landing page containing:
+- Shelter House profile.
+- Service objectives and benefits.
+- Registration requirements.
+- Registration procedures.
+- Official contact information.
+- Registration button.
+- Application tracking button.
+
+### Registration form
+
+Implement a multi-step form with a progress indicator and clear validation messages.
+
+**Step 1 — Patient Information**
+- National Identity Number (NIK), exactly 16 digits.
+- Full name as shown on the identity document.
+- Place and date of birth.
+- Address.
+- Active phone number.
+- Other information required by institutional policy.
+
+**Step 2 — Companion Information**
+- Whether the patient has a companion.
+- Companion's full name.
+- Companion's NIK, if required.
+- Relationship to the patient.
+- Companion's phone number.
+- Number of people requiring accommodation.
+
+**Step 3 — Healthcare and Referral Information**
+- Destination hospital or healthcare facility.
+- Referral or supporting letter number.
+- Planned medical appointment date.
+- Planned Shelter House check-in date.
+- Estimated length of stay.
+- Relevant service-related requirements.
+
+**Step 4 — Supporting Documents**
+
+Provide configurable document requirements, such as:
+- Patient's identity card.
+- Family Card (Kartu Keluarga).
+- Healthcare referral or supporting letter.
+- Proof of medical appointment.
+- Companion's identity card, if required.
+- Additional documents required by the Health Department.
+
+Each document requirement must be configurable as mandatory or optional. File formats, maximum sizes, and upload instructions must also be configurable.
+
+Do not assume that every listed document is mandatory until the institution confirms its official requirements.
+
+**Step 5 — Review and Submission**
+- Display a summary of all entered information.
+- Allow applicants to correct information before submission.
+- Display a privacy notice and the purposes of data processing.
+- Record the required privacy acknowledgments or consents.
+- Submit the application.
+- Generate a unique application number.
+- Generate secure tracking credentials or an equivalent verification mechanism.
+- Display an application receipt and tracking instructions.
+
+Successful submission must not automatically approve the application or guarantee room availability.
+
+## F. APPLICATION TRACKING MODULE
+
+Create a public tracking page that does not require a user account.
+
+Use a combination of:
+- Application number.
+- Patient NIK.
+- A secure access code or OTP-based verification mechanism.
+
+NIK must never be the only credential required to access application data.
+
+After successful verification, display:
+- Application number.
+- Current application status.
+- Submission date.
+- Completed workflow stages.
+- Document revision requests, if any.
+- Document review status.
+- Director's decision.
+- Approval letter generation status.
+- Electronic signature status.
+- Room assignment information, once confirmed.
+
+Never expose a complete NIK, identity documents, or sensitive patient information to unverified visitors.
+
+Implement rate limiting, OTP expiration, attempt limits, brute-force protection, and generic error responses that do not reveal whether a particular NIK exists in the system.
+
+## G. HEALTH DEPARTMENT ADMINISTRATOR MODULE
+
+Build a dashboard displaying:
+- New applications.
+- Applications under review.
+- Applications requiring revision.
+- Applications awaiting verification.
+- Verified applications.
+- Applications rejected during administrative verification.
+
+Provide a searchable and filterable table with:
+- Application number.
+- Patient name.
+- Submission date.
+- Destination healthcare facility.
+- Document status.
+- Application status.
+- Planned healthcare appointment date.
+- Available actions.
+
+Implement search, filters, pagination, and sorting.
+
+### Application review page
+
+Display:
+- Patient information.
+- Companion information.
+- Healthcare and referral details.
+- Supporting document list.
+- Secure document previews.
+- Individual document review results.
+- Previous review comments.
+- Application status history.
+
+Administrators must be able to:
+1. Review each document.
+2. Mark documents as valid or invalid.
+3. Provide specific comments.
+4. Return applications for revision.
+5. Verify applications when all mandatory requirements are satisfied.
+6. Reject administrative verification when justified.
+
+All actions must be validated on the backend. Applications with incomplete mandatory requirements must not be forwarded to the Director.
+
+## H. DIRECTOR APPROVAL MODULE
+
+Build a Director dashboard focused on decision-making.
+
+Display:
+- Applications awaiting decisions.
+- Approved applications.
+- Rejected applications.
+- Applications returned for clarification.
+- Letters awaiting electronic signatures.
+- Successfully signed letters.
+- Failed signature transactions.
+
+The application detail page must display patient information, supporting documents, administrative review results, administrator comments, and application history.
+
+Provide the following actions:
+- Approve.
+- Reject.
+- Return for clarification.
+
+A reason must be provided for rejection or clarification requests.
+
+### Approval workflow
+
+When the Director approves an application:
+
+1. The backend authenticates the Director and verifies the required permissions.
+2. The backend confirms that the application is in the `verified` state.
+3. The backend ensures that the reviewed application data and documents have not been improperly modified.
+4. The backend records the decision, the Director's identity, and the decision timestamp.
+5. The system generates a unique approval letter number according to the configured institutional numbering policy.
+6. The system generates a final PDF document using the approved application data.
+7. The system submits the PDF to the configured official electronic signature provider.
+8. The system verifies the signature status through the provider's API or authenticated callback mechanism.
+9. Once the signature is confirmed, the system stores the final document and available verification evidence.
+10. The system provides authorized staff and the applicant with secure access to the final approval letter.
+11. The application becomes available in the Shelter House Administrator's placement queue.
+12. All relevant events are recorded in the audit log and notifications are generated.
+
+If the electronic signature process fails, the application must show a pending or failed signature state. Never display a letter as officially signed before receiving confirmation from the provider.
+
+Implement safe retries, idempotency, integration error logging, and signature status reconciliation.
+
+Do not keep a database transaction open while waiting for an external signature provider. Use a job queue or an equivalent asynchronous processing mechanism.
+
+## I. OFFICIAL ELECTRONIC SIGNATURE INTEGRATION
+
+Build a modular integration layer so that the signature provider can be changed without rewriting the entire application.
+
+### Requirements
+
+- Identify an appropriate official electronic signature provider for institutional use in Indonesia.
+- Prioritize providers with official services, documented APIs, secure authentication, and signature verification capabilities.
+- Evaluate applicable legal requirements, signer identity verification, official authorization, document formats, and audit evidence.
+- Confirm that the selected signature type and certificate meet the institution's requirements and applicable regulations.
+- Use credentials officially provided to the institution.
+- Store API keys and secrets only in environment variables or a secret manager.
+- Never hardcode credentials in source code, frontend assets, or repositories.
+- Never use a government official's account, certificate, or signature without authorization.
+- Never simulate a signature and present it as an official electronic signature.
+
+### Integration architecture
+
+Create a service or adapter with functions to:
+- Submit a PDF for signing.
+- Store the provider's transaction ID.
+- Retrieve signing status.
+- Receive authenticated webhooks.
+- Verify status through the provider's API.
+- Retrieve the final signed document.
+- Validate available signature evidence.
+- Handle failures and retries.
+- Record a complete audit trail.
+
+Verify webhook authenticity using the provider's documented security mechanism. Never trust a callback based solely on its URL or submitted parameters.
+
+### Signature statuses
+
+Use a status model separate from the Director's approval decision:
+- `not_requested`
+- `pending_signature`
+- `signed`
+- `signature_failed`
+- `cancelled`
+
+Adapt the implementation to the actual states supported by the provider.
+
+If provider access is unavailable:
+- Build the integration interface.
+- Implement the adapter for the selected provider.
+- Provide a mock provider for development and testing only.
+- Clearly separate mock results from production signature status.
+- Document the required credentials and configuration.
+- Display a warning that official signing is not yet configured.
+
+Never label a PDF as officially signed if the integration has not produced a verifiable signature.
+
+## J. PDF APPROVAL LETTER GENERATOR
+
+Create a formal Indonesian-language approval letter template based on the institution's official identity.
+
+The letter should contain:
+- Official Health Department letterhead and logo.
+- Institution name and address.
+- Unique letter number.
+- Shelter House approval title.
+- Necessary patient identification details.
+- Referral or healthcare information.
+- Approved accommodation period.
+- Relevant Shelter House conditions.
+- Letter issue date.
+- Authorized signer's name and official position.
+- Electronic signature area compatible with the selected provider.
+- Document verification information or code.
+
+All institutional identity details, official letter numbers, signatory names, and logos must come from verified configuration.
+
+### Technical requirements
+
+- Generate the PDF from validated application data.
+- Keep the document template separate from business logic.
+- Create an immutable document version before sending it for signature.
+- Store a document hash before signing and, where applicable, a hash of the final document.
+- Store provider transaction metadata and available verification evidence.
+- Store final PDFs in private storage.
+- Provide downloads through authorized, authenticated endpoints.
+- Never modify the contents of a signed PDF.
+- Handle corrections through a documented correction or reissuance process.
+
+Build a public document verification page using an unpredictable, secure verification token. The page must reveal only the minimum information needed to verify the letter number and document authenticity.
+
+## K. SHELTER HOUSE ADMINISTRATOR MODULE
+
+The Shelter House Administrator must only receive applications approved by the Director.
+
+Create a dashboard displaying:
+- Patients awaiting room placement.
+- Patients assigned to rooms.
+- Patients currently staying at the Shelter House.
+- Patients who have checked out.
+- Available rooms.
+- Partially occupied rooms.
+- Full rooms.
+- Rooms unavailable due to maintenance.
+
+### Facility management
+
+Provide management for:
+- Buildings or locations.
+- Floors.
+- Rooms.
+- Room capacity.
+- Beds.
+- Room facilities.
+- Maintenance status.
+- Room condition notes.
+
+Use an appropriate room-and-bed data model. If a room contains multiple beds, calculate actual capacity from available beds or the configured allocation model.
+
+### Room statuses
+
+- `available`
+- `partially_occupied`
+- `full`
+- `maintenance`
+
+Room status should be calculated automatically based on capacity, active assignments, and maintenance conditions. Do not allow staff to mark a room as available when all of its capacity is occupied.
+
+### Placement workflow
+
+1. The Director approves the application.
+2. The approval letter is processed through the electronic signature provider.
+3. The application enters the placement queue.
+4. The Shelter House Administrator reviews the patient's requirements and room availability.
+5. The administrator assigns a room or bed.
+6. The system validates capacity and scheduling conflicts.
+7. The assignment is saved only after validation succeeds.
+8. Room availability is updated automatically.
+9. The applicant receives placement information according to institutional policy.
+10. The administrator records check-in and check-out.
+11. Capacity is recalculated when the patient leaves.
+
+If the approval letter has not yet been signed, define whether a provisional placement may be prepared as a draft. By default, do not represent the placement as confirmed or the letter as final until the required conditions have been met.
+
+### Conflict prevention
+
+Use appropriate database transactions and locking to prevent:
+- Two patients occupying the same bed during overlapping periods.
+- Occupancy exceeding the configured capacity.
+- Assignments to rooms under maintenance.
+- Assignments for applications that have not been approved.
+- Duplicate assignments caused by repeated requests.
+
+## L. WORKFLOW STATES AND STATE MACHINE
+
+Define explicit status transitions and validate them on the backend.
+
+Suggested application statuses:
+- `submitted`
+- `under_review`
+- `needs_revision`
+- `verified`
+- `pending_decision`
+- `approved`
+- `rejected`
+- `cancelled`
+
+Document statuses:
+- `pending_review`
+- `valid`
+- `invalid`
+- `revision_requested`
+
+Signature statuses:
+- `not_requested`
+- `pending_signature`
+- `signed`
+- `signature_failed`
+- `cancelled`
+
+Placement statuses:
+- `awaiting_placement`
+- `assigned`
+- `checked_in`
+- `checked_out`
+- `cancelled`
+
+These statuses represent separate business domains. Do not combine approval decisions, electronic signature status, room availability, and occupancy into a single status field.
+
+Define explicit transition rules, such as:
+- `submitted` → `under_review`
+- `under_review` → `needs_revision` or `verified`
+- `needs_revision` → `under_review`
+- `verified` → `pending_decision`
+- `pending_decision` → `approved`, `rejected`, or `needs_revision`
+- `approved` → signature processing and placement workflow
+
+Never allow a record to enter the `signed` state without provider confirmation. Never allow an active room assignment without a valid approval decision.
+
+Every status transition must record:
+- Previous status.
+- New status.
+- Acting user.
+- Timestamp.
+- Reason or comments.
+- Related process reference.
+
+## M. DATABASE DESIGN
+
+Design the Entity Relationship Diagram (ERD) before implementing database migrations.
+
+Include at least the following core tables or equivalent entities:
+
+1. `users`
+2. `roles` or an equivalent role management structure.
+3. `patients`
+4. `companions`
+5. `applications`
+6. `application_documents`
+7. `document_requirements`
+8. `application_reviews`
+9. `approval_decisions`
+10. `approval_letters`
+11. `esign_transactions`
+12. `buildings`
+13. `rooms`
+14. `beds`
+15. `room_assignments`
+16. `application_status_histories`
+17. `audit_logs`
+18. `notifications`
+19. `system_settings`
+
+Define relationships, foreign keys, unique constraints, indexes, and data retention strategies.
+
+Ensure that:
+- Application numbers are unique.
+- Letter numbers are unique according to institutional numbering rules.
+- Signature provider transaction IDs can be traced.
+- Documents support versioning.
+- Decisions are linked to authorized actors.
+- Room assignments are linked to patients, rooms or beds, and relevant periods.
+- Historical records remain available after status changes.
+- Sensitive data is not duplicated unnecessarily.
+- Critical operations maintain transactional consistency.
+
+Avoid using a single oversized table for unrelated entities.
+
+## N. AUDIT LOGS AND NOTIFICATIONS
+
+Record important events, including:
+- Application submission.
+- Document upload and replacement.
+- Document review.
+- Revision requests.
+- Administrative verification.
+- Approval and rejection.
+- Signature submission.
+- Signature status changes.
+- Final letter issuance.
+- Room assignment.
+- Check-in and check-out.
+- Configuration changes.
+- Role changes and account deactivation.
+
+Each audit event should contain the timestamp, actor, action, related entity, and outcome. Protect audit records from unauthorized modification.
+
+Never log passwords, OTPs, secret tokens, complete NIK values, or sensitive patient document contents.
+
+Implement in-app notifications for important workflow events. Prepare official email or WhatsApp integration if required later. Do not claim that external notifications have been sent if the service is not configured.
+
+## O. SECURITY AND DATA PROTECTION
+
+Implement:
+- Secure password hashing.
+- Secure session management.
+- CSRF protection where applicable.
+- Backend input validation.
+- Output escaping to prevent XSS.
+- ORM or parameterized database queries.
+- Backend RBAC and authorization policies.
+- Rate limiting for login, tracking, OTP, and downloads.
+- Private document storage.
+- File MIME-type and content validation.
+- Upload size restrictions.
+- Randomized storage filenames.
+- Path traversal and malicious upload protection.
+- HTTPS in production.
+- Environment variables or a secret manager.
+- Backup and recovery procedures.
+- Data retention and deletion policies.
+- Error handling that does not expose internal information.
+
+Treat NIK, identity documents, referral documents, and healthcare-related information as sensitive personal data requiring strict protection.
+
+Apply data minimization, purpose limitation, access restrictions, and compliance with applicable Indonesian personal data protection and healthcare regulations.
+
+Create a privacy notice and document the data management policy. Do not claim that the application automatically satisfies every legal requirement merely because security features have been implemented.
+
+## P. UI/UX AND APPLICATION PAGES
+
+Create a modern, professional, consistent interface suitable for a government public service application.
+
+Use:
+- Dark blue, light blue, white, and neutral gray colors.
+- Readable typography.
+- Sidebar navigation for internal users.
+- A top navigation bar displaying the user's identity and role.
+- Dashboard statistics cards.
+- Searchable and filterable tables with pagination.
+- Multi-step forms.
+- Consistent status badges.
+- Confirmation dialogs for important actions.
+- Loading, empty, error, and success states.
+- Responsive layouts.
+- Basic accessibility and keyboard navigation.
+
+Build the following pages:
+1. Landing page.
+2. Shelter House information.
+3. Requirements and procedures.
+4. Registration form.
+5. Submission summary.
+6. Application tracking.
+7. Staff login.
+8. Health Department Administrator dashboard.
+9. Document review page.
+10. Director dashboard.
+11. Decision details.
+12. Electronic signature status and history.
+13. Shelter House Administrator dashboard.
+14. Room and bed management.
+15. Patient placement.
+16. User and role management.
+17. System configuration.
+18. Approval letter template configuration.
+19. Audit logs.
+20. Letter verification page.
+
+Do not use fabricated patient data in production. Use dummy records only in development and test seeders.
+
+## Q. TESTING AND QUALITY ASSURANCE
+
+Create automated tests for:
+- Public registration.
+- NIK and phone number validation.
+- Document uploads.
+- Authentication and authorization for every role.
+- Unauthorized cross-role access.
+- Document review.
+- Revision requests.
+- Administrative verification.
+- Director approval and rejection.
+- PDF generation.
+- Electronic signature integration in test mode.
+- Webhook verification.
+- Signature transaction retries and idempotency.
+- Application tracking and access codes.
+- Download authorization.
+- Room placement.
+- Double-booking prevention.
+- Capacity enforcement.
+- Audit logging.
+- Database and external provider failure handling.
+
+Provide unit tests, integration tests, and feature or end-to-end tests according to the selected technology stack.
+
+Run the relevant tests. Do not report that tests passed unless they have actually been executed. Report failures and fix them before declaring implementation complete.
+
+## R. DEPLOYMENT AND DOCUMENTATION
+
+Deliver:
+- Complete source code.
+- An example `.env.example` configuration file.
+- Database migrations.
+- Development seeders.
+- Installation instructions.
+- Application startup commands.
+- Demo account setup instructions.
+- API documentation if an API is used.
+- Document storage documentation.
+- Electronic signature configuration documentation.
+- Webhook documentation.
+- Backup and restoration procedures.
+- Staging and production deployment instructions.
+- Troubleshooting guidance.
+- A list of required environment variables.
+- A checklist of completed and incomplete features.
+
+Never commit real secrets to the repository. Use the signature provider's sandbox or test mode during development.
+
+## S. IMPLEMENTATION PHASES
+
+Work through the following phases.
+
+**Phase 1 — Requirements and Architecture**
+- Analyze requirements.
+- Compare technology stacks.
+- Design system architecture.
+- Create workflow diagrams.
+- Design the ERD.
+- Define status transitions.
+- Create a role-permission matrix.
+- Design the electronic signature integration.
+
+**Phase 2 — Application Foundation**
+- Set up the project.
+- Configure the database.
+- Implement authentication.
+- Implement roles and authorization.
+- Build shared UI layouts.
+- Configure the environment.
+
+**Phase 3 — Registration and Tracking**
+- Build public registration forms.
+- Implement document uploads.
+- Generate application numbers.
+- Implement secure access codes.
+- Build tracking.
+- Implement backend validation.
+
+**Phase 4 — Verification and Approval**
+- Build the Health Department Administrator dashboard.
+- Implement document reviews.
+- Build the Director dashboard.
+- Implement decisions.
+- Record application history.
+
+**Phase 5 — PDF and Electronic Signatures**
+- Build the approval letter template.
+- Implement PDF generation.
+- Integrate the signature provider.
+- Implement authenticated webhooks.
+- Validate signatures.
+- Store final documents.
+
+**Phase 6 — Room Management**
+- Implement buildings, rooms, and beds.
+- Implement patient placement.
+- Enforce room capacity.
+- Implement check-in and check-out.
+- Prevent scheduling conflicts.
+
+**Phase 7 — Finalization**
+- Implement audit logs.
+- Implement notifications.
+- Run automated tests.
+- Fix bugs.
+- Complete documentation.
+- Prepare deployment.
+
+Complete and integrate each module before moving on. Avoid creating numerous pages that appear finished but are not connected to the backend.
+
+If the development environment supports terminal and file operations, use them to build, run, and test the application. If access limitations or external integrations prevent completion, explain the exact limitation.
+
+## T. DEFINITION OF DONE
+
+The application is considered complete only when:
+
+1. The public can register without creating an account.
+2. Tracking protects applicant identity and patient data.
+3. Health Department Administrators can review and verify documents.
+4. The Director can make decisions according to authorized permissions.
+5. Director decisions are recorded and auditable.
+6. The system generates approval letters in PDF format.
+7. Approval letters can be processed through an official electronic signature provider.
+8. Signature status is confirmed before a letter is marked as signed.
+9. Applicants can securely download their approval letters.
+10. The Shelter House Administrator can assign rooms after approval.
+11. Room and bed capacity are validated.
+12. Double booking and overcapacity are prevented.
+13. Every role is restricted by backend authorization.
+14. Core automated tests have been executed successfully.
+15. Installation and configuration documentation is available.
+
+Clearly distinguish between fully implemented features, features tested using mocks, and features that still require external credentials or institutional approval.
+
+## FIRST INSTRUCTION
+
+Begin by producing:
+1. A requirements summary and business assumptions.
+2. A comparison of at least two technology stacks and the final recommendation.
+3. A system architecture diagram.
+4. A workflow diagram from registration to room placement.
+5. An ERD with table relationships.
+6. A role-permission matrix.
+7. An official electronic signature integration design.
+8. An implementation and testing plan.
+
+After completing the initial design, proceed with application development using the selected stack. Do not stop at documentation or architectural diagrams. Implement every module, test the integrations, and ensure the application can run according to the provided documentation.
+
+Prioritize patient data security, correct business workflows, approval letter integrity, and room capacity consistency over visual appearance alone.
