@@ -18,10 +18,10 @@ import {
   SystemSetting,
   User,
   UserRole,
-} from '../types/models';
-import { ALLOWED_APPLICATION_TRANSITIONS } from '../types/workflow';
-import { esignProviderInstance } from './esign/MockSandboxEsignProvider';
-import { generateApprovalLetterPdf } from './pdf/letterGenerator';
+} from '../types/models.ts';
+import { ALLOWED_APPLICATION_TRANSITIONS } from '../types/workflow.ts';
+import { esignProviderInstance } from './esign/MockSandboxEsignProvider.ts';
+import { generateApprovalLetterPdf } from './pdf/letterGenerator.ts';
 
 const STORAGE_KEYS = {
   USERS: 'simrsp_users',

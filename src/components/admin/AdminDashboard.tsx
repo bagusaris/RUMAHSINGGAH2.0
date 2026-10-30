@@ -13,10 +13,10 @@ import {
   Building,
   RefreshCw
 } from 'lucide-react';
-import { storage } from '../../services/storage';
-import { Application, ApplicationStatus } from '../../types/models';
-import { APPLICATION_STATUS_CONFIG } from '../../types/workflow';
-import { DocumentReviewModal } from './DocumentReviewModal';
+import { storage } from '../../services/storage.ts';
+import { Application, ApplicationStatus } from '../../types/models.ts';
+import { APPLICATION_STATUS_CONFIG } from '../../types/workflow.ts';
+import { DocumentReviewModal } from './DocumentReviewModal.tsx';
 
 export const AdminDashboard: React.FC = () => {
   const [applications, setApplications] = useState<Application[]>(() => storage.getApplications());

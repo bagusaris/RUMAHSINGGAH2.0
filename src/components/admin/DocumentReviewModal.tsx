@@ -13,10 +13,10 @@ import {
   XCircle,
   HelpCircle
 } from 'lucide-react';
-import { storage } from '../../services/storage';
-import { useAuth } from '../../services/auth/authContext';
-import { Application, ApplicationDocument, DocumentStatus } from '../../types/models';
-import { DOCUMENT_STATUS_CONFIG } from '../../types/workflow';
+import { storage } from '../../services/storage.ts';
+import { useAuth } from '../../services/auth/authContext.tsx';
+import { Application, ApplicationDocument, DocumentStatus } from '../../types/models.ts';
+import { DOCUMENT_STATUS_CONFIG } from '../../types/workflow.ts';
 
 interface DocumentReviewModalProps {
   application: Application;

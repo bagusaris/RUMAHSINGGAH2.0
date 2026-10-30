@@ -14,10 +14,10 @@ import {
   RefreshCw,
   Plus
 } from 'lucide-react';
-import { storage } from '../../services/storage';
-import { useAuth } from '../../services/auth/authContext';
-import { Application, Room, RoomAssignment } from '../../types/models';
-import { RoomPlacementModal } from './RoomPlacementModal';
+import { storage } from '../../services/storage.ts';
+import { useAuth } from '../../services/auth/authContext.tsx';
+import { Application, Room, RoomAssignment } from '../../types/models.ts';
+import { RoomPlacementModal } from './RoomPlacementModal.tsx';
 
 export const ShelterDashboard: React.FC = () => {
   const { currentUser } = useAuth();

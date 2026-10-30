@@ -12,10 +12,10 @@ import {
   AlertTriangle,
   FileDown
 } from 'lucide-react';
-import { useAuth } from '../../services/auth/authContext';
-import { storage } from '../../services/storage';
-import { UserRole } from '../../types/models';
-import { generateDeveloperGuidePdf } from '../../services/pdf/developerGuideGenerator';
+import { useAuth } from '../../services/auth/authContext.tsx';
+import { storage } from '../../services/storage.ts';
+import { UserRole } from '../../types/models.ts';
+import { generateDeveloperGuidePdf } from '../../services/pdf/developerGuideGenerator.ts';
 
 interface TopNavbarProps {
   onOpenTestRunner: () => void;
@@ -99,7 +99,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ onOpenTestRunner, onOpenLa
           <div className="flex items-center gap-2 sm:gap-3">
             
             {/* Download Developer Handbook PDF Button */}
-            <button
+            {/* <button
               onClick={() => {
                 const { url, fileName } = generateDeveloperGuidePdf();
                 const a = document.createElement('a');
@@ -111,13 +111,13 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ onOpenTestRunner, onOpenLa
               }}
               className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 transition-colors shadow-2xs cursor-pointer"
               title="Unduh Buku Panduan & Tutorial Pengembang (PDF)"
-            >
-              <FileDown className="w-3.5 h-3.5 text-blue-600" />
+            > */}
+              {/* <FileDown className="w-3.5 h-3.5 text-blue-600" />
               <span className="hidden md:inline">Buku Panduan PDF</span>
-            </button>
+            </button> */}
 
             {/* View Laravel Codebase Button */}
-            {onOpenLaravelCode && (
+            {/* {onOpenLaravelCode && (
               <button
                 onClick={onOpenLaravelCode}
                 className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 transition-colors shadow-2xs cursor-pointer"
@@ -126,17 +126,17 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ onOpenTestRunner, onOpenLa
                 <span className="w-3.5 h-3.5 rounded bg-rose-600 text-white font-bold text-[9px] flex items-center justify-center">LV</span>
                 <span className="hidden md:inline">Kode Laravel (PHP 8.5)</span>
               </button>
-            )}
+            )} */}
 
             {/* Automated QA Test Runner Button */}
-            <button
+            {/* <button
               onClick={onOpenTestRunner}
               className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition-colors shadow-2xs"
               title="Jalankan Pengujian Otomatis QA"
             >
               <FlaskConical className="w-3.5 h-3.5 text-emerald-600" />
               <span className="hidden sm:inline">Uji QA Otomatis</span>
-            </button>
+            </button> */}
 
             {/* IF PUBLIC: Only show 'Login Petugas' button as explicitly requested */}
             {isPublic ? (

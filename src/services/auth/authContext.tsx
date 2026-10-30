@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User, UserRole } from '../../types/models';
-import { ROLE_PERMISSIONS, RolePermission } from '../../types/workflow';
-import { storage } from '../storage';
+import { ROLE_PERMISSIONS, RolePermission } from '../../types/workflow.ts';
+import { storage } from '../storage.ts';
 
 interface AuthContextType {
   currentUser: User;

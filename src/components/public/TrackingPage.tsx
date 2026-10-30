@@ -15,9 +15,9 @@ import {
   Calendar,
   AlertCircle
 } from 'lucide-react';
-import { storage } from '../../services/storage';
-import { Application } from '../../types/models';
-import { APPLICATION_STATUS_CONFIG, DOCUMENT_STATUS_CONFIG, SIGNATURE_STATUS_CONFIG } from '../../types/workflow';
+import { storage } from '../../services/storage.ts';
+import { Application } from '../../types/models.ts';
+import { APPLICATION_STATUS_CONFIG, DOCUMENT_STATUS_CONFIG, SIGNATURE_STATUS_CONFIG } from '../../types/workflow.ts';
 
 interface TrackingPageProps {
   onBackToHome: () => void;

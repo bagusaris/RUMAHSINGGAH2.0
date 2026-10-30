@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldCheck, CheckCircle2, AlertTriangle, Search, FileText, Lock, Building2, ArrowLeft } from 'lucide-react';
-import { storage } from '../../services/storage';
+import { storage } from '../../services/storage.ts';
 import { ApprovalLetter, Application } from '../../types/models';
 
 interface DocumentVerificationPageProps {

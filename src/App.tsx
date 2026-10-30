@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { AuthProvider, useAuth } from './services/auth/authContext';
-import { TopNavbar } from './components/layout/TopNavbar';
-import { Sidebar } from './components/layout/Sidebar';
-import { LandingPage } from './components/public/LandingPage';
-import { RegistrationForm } from './components/public/RegistrationForm';
-import { TrackingPage } from './components/public/TrackingPage';
-import { DocumentVerificationPage } from './components/public/DocumentVerificationPage';
-import { StaffLoginPage } from './components/auth/StaffLoginPage';
-import { AdminDashboard } from './components/admin/AdminDashboard';
-import { DirectorDashboard } from './components/director/DirectorDashboard';
-import { ShelterDashboard } from './components/shelter/ShelterDashboard';
-import { SuperAdminDashboard } from './components/superadmin/SuperAdminDashboard';
-import { TestRunnerModal } from './components/testing/TestRunnerModal';
-import { LaravelCodeViewerModal } from './components/laravel/LaravelCodeViewerModal';
+import { AuthProvider, useAuth } from './services/auth/authContext.tsx';
+import { TopNavbar } from './components/layout/TopNavbar.tsx';
+import { Sidebar } from './components/layout/Sidebar.tsx';
+import { LandingPage } from './components/public/LandingPage.tsx';
+import { RegistrationForm } from './components/public/RegistrationForm.tsx';
+import { TrackingPage } from './components/public/TrackingPage.tsx';
+import { DocumentVerificationPage } from './components/public/DocumentVerificationPage.tsx';
+import { StaffLoginPage } from './components/auth/StaffLoginPage.tsx';
+import { AdminDashboard } from './components/admin/AdminDashboard.tsx';
+import { DirectorDashboard } from './components/director/DirectorDashboard.tsx';
+import { ShelterDashboard } from './components/shelter/ShelterDashboard.tsx';
+import { SuperAdminDashboard } from './components/superadmin/SuperAdminDashboard.tsx';
+import { TestRunnerModal } from './components/testing/TestRunnerModal.tsx';
+import { LaravelCodeViewerModal } from './components/laravel/LaravelCodeViewerModal.tsx';
 
 const AppContent: React.FC = () => {
   const { currentRole } = useAuth();

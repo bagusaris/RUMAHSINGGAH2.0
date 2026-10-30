@@ -20,10 +20,10 @@ import {
   Briefcase,
   FileDown
 } from 'lucide-react';
-import { storage } from '../../services/storage';
-import { useAuth } from '../../services/auth/authContext';
-import { User, UserRole, DocumentRequirement, SystemSetting, AuditLog } from '../../types/models';
-import { generateDeveloperGuidePdf } from '../../services/pdf/developerGuideGenerator';
+import { storage } from '../../services/storage.ts';
+import { useAuth } from '../../services/auth/authContext.tsx';
+import { User, UserRole, DocumentRequirement, SystemSetting, AuditLog } from '../../types/models.ts';
+import { generateDeveloperGuidePdf } from '../../services/pdf/developerGuideGenerator.ts';
 
 export const SuperAdminDashboard: React.FC = () => {
   const { allUsers, currentUser, refreshUsers } = useAuth();

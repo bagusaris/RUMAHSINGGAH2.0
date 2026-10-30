@@ -18,8 +18,8 @@ import {
   Phone,
   FileCheck2
 } from 'lucide-react';
-import { storage } from '../../services/storage';
-import { Application, DocumentRequirement } from '../../types/models';
+import { storage } from '../../services/storage.ts';
+import { Application, DocumentRequirement } from '../../types/models.ts';
 
 interface RegistrationFormProps {
   onSuccess: (app: Application, accessCode: string) => void;
@@ -390,14 +390,14 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess, o
             Lengkapi data secara akurat. Pelayanan ini 100% bebas biaya (Gratis).
           </p>
         </div>
-        <button
+        {/* <button
           type="button"
           onClick={handleQuickFillSample}
           className="text-[11px] font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200 transition-colors"
           title="Isi contoh data cepat untuk demo"
         >
           ⚡ Isi Contoh Data Cepat
-        </button>
+        </button> */}
       </div>
 
       {/* Progress Stepper */}

@@ -15,8 +15,8 @@ import {
   PenTool,
   Home
 } from 'lucide-react';
-import { useAuth } from '../../services/auth/authContext';
-import { storage } from '../../services/storage';
+import { useAuth } from '../../services/auth/authContext.tsx';
+import { storage } from '../../services/storage.ts';
 
 interface SidebarProps {
   activeTab: string;

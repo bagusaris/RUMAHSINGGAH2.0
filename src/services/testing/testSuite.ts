@@ -1,6 +1,6 @@
-import { storage } from '../storage';
-import { ROLE_PERMISSIONS } from '../../types/workflow';
-import { esignProviderInstance } from '../esign/MockSandboxEsignProvider';
+import { storage } from '../storage.ts';
+import { ROLE_PERMISSIONS } from '../../types/workflow.ts';
+import { esignProviderInstance } from '../esign/MockSandboxEsignProvider.ts';
 
 export interface TestCaseResult {
   id: string;

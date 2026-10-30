@@ -16,10 +16,10 @@ import {
   Search,
   Lock
 } from 'lucide-react';
-import { storage } from '../../services/storage';
-import { useAuth } from '../../services/auth/authContext';
-import { Application } from '../../types/models';
-import { APPLICATION_STATUS_CONFIG, SIGNATURE_STATUS_CONFIG } from '../../types/workflow';
+import { storage } from '../../services/storage.ts';
+import { useAuth } from '../../services/auth/authContext.tsx';
+import { Application } from '../../types/models.ts';
+import { APPLICATION_STATUS_CONFIG, SIGNATURE_STATUS_CONFIG } from '../../types/workflow.ts';
 
 export const DirectorDashboard: React.FC = () => {
   const { currentUser } = useAuth();

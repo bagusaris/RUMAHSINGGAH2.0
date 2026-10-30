@@ -10,9 +10,9 @@ import {
   User,
   Users
 } from 'lucide-react';
-import { storage } from '../../services/storage';
-import { useAuth } from '../../services/auth/authContext';
-import { Application, Room, Bed as BedModel } from '../../types/models';
+import { storage } from '../../services/storage.ts';
+import { useAuth } from '../../services/auth/authContext.tsx';
+import { Application, Room, Bed as BedModel } from '../../types/models.ts';
 
 interface RoomPlacementModalProps {
   application: Application;

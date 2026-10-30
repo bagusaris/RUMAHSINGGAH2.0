@@ -17,8 +17,8 @@ import {
   AlertCircle,
   FileDown
 } from 'lucide-react';
-import { storage } from '../../services/storage';
-import { generateDeveloperGuidePdf } from '../../services/pdf/developerGuideGenerator';
+import { storage } from '../../services/storage.ts';
+import { generateDeveloperGuidePdf } from '../../services/pdf/developerGuideGenerator.ts';
 
 interface LandingPageProps {
   onStartRegistration: () => void;

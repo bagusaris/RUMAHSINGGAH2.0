@@ -10,7 +10,7 @@ import {
   Terminal,
   Clock
 } from 'lucide-react';
-import { runAllAutomatedTests, TestCaseResult } from '../../services/testing/testSuite';
+import { runAllAutomatedTests, TestCaseResult } from '../../services/testing/testSuite.ts';
 
 interface TestRunnerModalProps {
   isOpen: boolean;
